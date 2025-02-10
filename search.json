@@ -25,7 +25,7 @@
     "href": "index.html#technicalities",
     "title": "Epistemology Vizualized",
     "section": "Technicalities",
-    "text": "Technicalities\n\nText: markdown and the occasional LaTeX for maths.\nCode: Javascript for lean and fast in-browser rendering. We could consider Wasm Python through Wasm, but doesn’t seem that easy yet.\nInteractive visualizations: Observable. Could consider others.\nDocument rendering: Quarto."
+    "text": "Technicalities\n\nText: markdown and the occasional LaTeX for maths.\nCode: Javascript for lean and fast in-browser rendering.\nInteractive visualizations: Observable, easy to code and beautiful.\nDocument rendering: Quarto. Handles website structure, scholarly apparatus, LaTeX and Observable.\n\nThese choices aren’t set in stone. I’ve considered interactive Jupyter notebooks, Observable notebooks. There are yet others."
   },
   {
     "objectID": "index.html#github-page",
