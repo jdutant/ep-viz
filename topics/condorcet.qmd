@@ -47,12 +47,12 @@ Each elector is assumed to have the same degree of
 competence, or likelihood of being correct (between 0, always wrong, and 1, always right).
 On the left is a visual representation of the electorate as scatter dots. electors who have voted correctly are in green, others in red. On the right is a tally of the result. 
 
-Use sliders to change elector compentence and the number of electors. A new vote take place on any change. 
+Use sliders to change elector compentence and the number of electors. A new vote take place on any change in the sliders, or if you click the "Revote" button.
 
 
 ```{ojs}
 //| panel: input
-//| layout-ncol: 2
+
 viewof numElectors = Inputs.range(
   [1, 10000], 
   {value: 50, step: 1, 
@@ -63,13 +63,18 @@ viewof indCompetence = Inputs.range(
     [0,1],
     {value: .55, step: 0.001, label: "Individual elector competence"}
 )
+viewof revote = Inputs.button("Revote");
 ```
 
 ```{ojs}
 // Set up our CondorcetElection object
 import { CondorcetElection } from "./CondorcetElection.js";
 
-vote = new CondorcetElection(numElectors,indCompetence);
+// Wrapper activated when "Revote" is clicked
+function recreateElection(numElec,indCom,click) {
+  return new CondorcetElection(numElec,indCom);
+}
+vote = recreateElection(numElectors,indCompetence,revote)
 ```
 
 ::: {layout="[ [2,1] ]"}
