@@ -12,7 +12,7 @@ The project aims at providing open source, modular, interactive visualizations o
 
 # Example
 
-See the Condorcet Jury Theorem page for a prototype.
+See the [Condorcet Jury Theorem](topics/condorcet.qmd) page for a prototype.
 
 # Technicalities
 
