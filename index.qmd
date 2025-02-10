@@ -18,9 +18,11 @@ See the [Condorcet Jury Theorem](topics/condorcet.qmd) page for a prototype.
 ## Technicalities
 
 * Text: markdown and the occasional LaTeX for maths.
-* Code: Javascript for lean and fast in-browser rendering. We could consider Wasm Python through Wasm, but doesn't seem that easy yet.
-* Interactive visualizations: [Observable](https://observablehq.com/). Could consider others.
-* Document rendering: [Quarto](https://quarto.org). 
+* Code: Javascript for lean and fast in-browser rendering.
+* Interactive visualizations: [Observable](https://observablehq.com/), easy to code and beautiful.
+* Document rendering: [Quarto](https://quarto.org). Handles website structure, scholarly apparatus, LaTeX and Observable. 
+
+These choices aren't set in stone. I've considered interactive Jupyter notebooks, Observable notebooks. There are yet others.
 
 ## GitHub page
 
