@@ -176,7 +176,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#presentation" id="toc-presentation" class="nav-link active" data-scroll-target="#presentation">Presentation</a></li>
-  <li><a href="#vote-simulation" id="toc-vote-simulation" class="nav-link" data-scroll-target="#vote-simulation">Vote simulation</a></li>
+  <li><a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a></li>
   <li><a href="#graph" id="toc-graph" class="nav-link" data-scroll-target="#graph">Graph</a></li>
   </ul>
 </nav>
@@ -211,8 +211,8 @@ div.csl-indent {
 <p>Consider members of a group (jury, electorate) facing a question or decision with two options (guilty or not, candidate A or candidate B, etc.). Suppose it makes sense to consider one of the two options as in fact <em>correct</em>. For instance, if we’re judging guilt on a charge, the correct answer is ‘guilty’ if the person is guilty. Suppose next that electors somewhat reliable but not infallible: for simplicity, let’s assume each elector is exactly 2/3 likely of picking the correct answer. Suppose finally that electors are each deciding independently of each other. How likely it is that the majority picks the correct answer? If the group has only 1 member, the majority is just that single member, and the chance that they’ll pick the correct answer is 2/3 or about 66%. But if the group has 3 members, it is 20/27 or about 75%. The majority is more likely to be right than any individual members, and the likelihood that the majority is right increases quickly as the size of the group increases.</p>
 <p>Let’s visualize this.</p>
 </section>
-<section id="vote-simulation" class="level2">
-<h2 class="anchored" data-anchor-id="vote-simulation">Vote simulation</h2>
+<section id="simulation" class="level2">
+<h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <p>Each elector is assumed to have the same degree of competence, or likelihood of being correct (between 0, always wrong, and 1, always right). On the left is a visual representation of the electorate as scatter dots. electors who have voted correctly are in green, others in red. On the right is a tally of the result.</p>
 <p>Use sliders to change elector compentence and the number of electors. A new vote take place on any change in the sliders, or if you click the “Revote” button.</p>
 <div class="cell panel-input card bg-light p-2">
