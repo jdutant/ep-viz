@@ -41,7 +41,7 @@ size of the group increases.
 
 Let's visualize this.
 
-## Vote simulation
+## Simulation
 
 Each elector is assumed to have the same degree of 
 competence, or likelihood of being correct (between 0, always wrong, and 1, always right).
