@@ -2,22 +2,26 @@
 title: "Epistemology Vizualized"
 ---
 
-This is a prototype website for the *Epistemology Visualized* project.
+This is a prototype website for the [*Epistemology Visualized* project](https://github.com/jdutant/ep-viz).
 
-Copyright 2025 Julien Dutant.  
+Copyright 2025 Julien Dutant. Distributed under a 
+GNU General Public License 3. 
 
-# Aims
+## Aims
 
 The project aims at providing open source, modular, interactive visualizations of important theorms and models in epistemology, starting with political epistemology.
 
-# Example
+## Example
 
 See the [Condorcet Jury Theorem](topics/condorcet.qmd) page for a prototype.
 
-# Technicalities
+## Technicalities
 
 * Text: markdown and the occasional LaTeX for maths.
 * Code: Javascript for lean and fast in-browser rendering. We could consider Wasm Python through Wasm, but doesn't seem that easy yet.
 * Interactive visualizations: [Observable](https://observablehq.com/). Could consider others.
 * Document rendering: [Quarto](https://quarto.org). 
 
+## GitHub page
+
+Source code available on [jdutant/ep-viz](https://github.com/jdutant/ep-viz) on GitHub.
