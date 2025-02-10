@@ -4,7 +4,35 @@
     "href": "index.html",
     "title": "Epistemology Vizualized",
     "section": "",
-    "text": "This is a prototype website for the Epistemology Visualized project.\nCopyright 2025 Julien Dutant.\n\nAims\nThe project aims at providing open source, modular, interactive visualizations of important theorms and models in epistemology, starting with political epistemology.\n\n\nExample\nSee the Condorcet Jury Theorem page for a prototype.\n\n\nTechnicalities\n\nText: markdown and the occasional LaTeX for maths.\nCode: Javascript for lean and fast in-browser rendering. We could consider Wasm Python through Wasm, but doesn’t seem that easy yet.\nInteractive visualizations: Observable. Could consider others.\nDocument rendering: Quarto."
+    "text": "This is a prototype website for the Epistemology Visualized project.\nCopyright 2025 Julien Dutant. Distributed under a GNU General Public License 3."
+  },
+  {
+    "objectID": "index.html#aims",
+    "href": "index.html#aims",
+    "title": "Epistemology Vizualized",
+    "section": "Aims",
+    "text": "Aims\nThe project aims at providing open source, modular, interactive visualizations of important theorms and models in epistemology, starting with political epistemology."
+  },
+  {
+    "objectID": "index.html#example",
+    "href": "index.html#example",
+    "title": "Epistemology Vizualized",
+    "section": "Example",
+    "text": "Example\nSee the Condorcet Jury Theorem page for a prototype."
+  },
+  {
+    "objectID": "index.html#technicalities",
+    "href": "index.html#technicalities",
+    "title": "Epistemology Vizualized",
+    "section": "Technicalities",
+    "text": "Technicalities\n\nText: markdown and the occasional LaTeX for maths.\nCode: Javascript for lean and fast in-browser rendering. We could consider Wasm Python through Wasm, but doesn’t seem that easy yet.\nInteractive visualizations: Observable. Could consider others.\nDocument rendering: Quarto."
+  },
+  {
+    "objectID": "index.html#github-page",
+    "href": "index.html#github-page",
+    "title": "Epistemology Vizualized",
+    "section": "GitHub page",
+    "text": "GitHub page\nSource code available on jdutant/ep-viz on GitHub."
   },
   {
     "objectID": "topics/condorcet.html",
