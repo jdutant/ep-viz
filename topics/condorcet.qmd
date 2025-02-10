@@ -1,0 +1,219 @@
+---
+title: Condorcet Jury Theorem
+execute:
+  echo: false # do not display source code
+---
+
+Condorcet's [-@condorcet1785] Jury Theorem is the first "wisdom of the crowds" mathematical result.
+
+## Presentation
+
+Condorcet's Jury Theorem is a straightforward application of the
+"law of large numbers". You're probably familiar with some
+applications of the law. Say you're throwing a die repeatedly, and
+let's call faces 3,4,5 and 6 "high" outcomes. On each throw you
+have a 2/3 chance to get a "high" outcome. But as the number of
+throws increases, it becomes more and more likely that about 2/3
+of our outcomes are high. (One important condition for this to
+hold is that the throws are *independent*: past outcomes don't
+affect future ones.)
+
+Condorcet's idea was that if members of a jury or an electorate
+are relevantly like dice, the majority rule is more likely to make
+good decisions than any individual member.
+
+Consider members of a group (jury, electorate) facing a question
+or decision with two options (guilty or not, candidate A or
+candidate B, etc.). Suppose it makes sense to consider one of the
+two options as in fact *correct*. For instance, if we're judging
+guilt on a charge, the correct answer is 'guilty' if the person is
+guilty. Suppose next that electors somewhat reliable but not
+infallible: for simplicity, let's assume each elector is exactly 2/3
+likely of picking the correct answer. Suppose finally that electors
+are each deciding independently of each other. How likely it is
+that the majority picks the correct answer? If the group has only
+1 member, the majority is just that single member, and the chance
+that they'll pick the correct answer is 2/3 or about 66%. But if
+the group has 3 members, it is 20/27 or about 75%. The majority is
+more likely to be right than any individual members, and the
+likelihood that the majority is right increases quickly as the
+size of the group increases.
+
+Let's visualize this.
+
+## Vote simulation
+
+Each elector is assumed to have the same degree of 
+competence, or likelihood of being correct (between 0, always wrong, and 1, always right).
+On the left is a visual representation of the electorate as scatter dots. electors who have voted correctly are in green, others in red. On the right is a tally of the result. 
+
+Use sliders to change elector compentence and the number of electors. A new vote take place on any change. 
+
+
+```{ojs}
+//| panel: input
+//| layout-ncol: 2
+viewof numElectors = Inputs.range(
+  [1, 10000], 
+  {value: 50, step: 1, 
+  transform: Math.log,
+  label: "Number of electors:"}
+)
+viewof indCompetence = Inputs.range(
+    [0,1],
+    {value: .55, step: 0.001, label: "Individual elector competence"}
+)
+```
+
+```{ojs}
+// Set up our CondorcetElection object
+import { CondorcetElection } from "./CondorcetElection.js";
+
+vote = new CondorcetElection(numElectors,indCompetence);
+```
+
+::: {layout="[ [2,1] ]"}
+
+```{ojs}
+// Display scatter plot
+import { circleScatter } from "./components/circleScatter.js";
+
+// scatter plot parameters
+width = 480
+dot_radius = 4
+// fix a reasonable radius given nb electors
+dot_area = Math.PI * dot_radius^2 ;
+desired_circle_area = dot_area * numElectors * 4
+radius_needed = Math.min(Math.sqrt( desired_circle_area / Math.PI ), width / 2);
+
+points = circleScatter(vote.votes, {
+    center:[width / 2, width / 2],
+    radius:radius_needed, 
+    coordinates:'cartesian'});
+
+// hack to fix the aspect ratio: multiply width by 1.5
+Plot.plot({
+   width: width * 1.5,
+   height: width,
+   marginTop: 0, marginRight: 0, marginBottom: 0, marginLeft:0,
+   label: null,
+   x: { domain: [0,width * 1.5], ticks: 0},
+   y: { domain: [0,width], ticks: 0},
+   marks: [
+     Plot.dot(points, {x: "x", y: "y", r: dot_radius, stroke: "color", fill: "color"}),
+   ],
+})
+```
+
+```{ojs}
+// Display result as a graph
+result = [
+  { Answer: "Correct", 
+    color: "green",
+    Percentage: vote.percent * 100,
+  },
+  { Answer: "Incorrect", 
+    color: "red",
+    Percentage: (1 - vote.percent) * 100
+  }
+]
+
+Plot.plot({
+  width: width / 3,
+  height: width / 2,
+  marks: [
+    Plot.barY(result, { x: "Answer", y: "Percentage", fill: "color" })
+  ],
+  y: { domain: [0,100], ticks: 10},
+})
+
+```
+
+:::
+
+Note how the results becomes less and less volatile as the number of electors increases.
+
+# Graph
+
+We'd now like to look at the *probability that the majority picks
+the correct answer*, and how that varies with the number and 
+competence of electors. 
+
+Look at the graph below and check how much electors you need to 
+reach a 95% probability of correct majority vote with electors
+that are individually merely 60% likely to vote correctly. 
+
+```{ojs}
+//| panel: input
+//| layout-ncol: 2
+viewof maxPopulation = Inputs.range(
+  [1, 10000], 
+  {value: 200, step: 1, 
+  transform: Math.log,
+  label: "Max number of electors:"}
+)
+viewof g1Competence = Inputs.range(
+    [0,1],
+    {value: .55, step: 0.001, label: "Elector competence", color: "steelblue"}
+)
+// viewof targetThreshold = Inputs.range(
+//     [0,1],
+//     {value: .95, step: 0.001, label: "Target probability of correct majority vote", color: "red"}
+// )
+```
+
+```{ojs}
+jStat = require('jstat')
+// probability that the majority vote is correct
+// ties are solved by a coin toss
+// probMajorityCorrect(n*2,p) = probMajorityCorrect(n*2-1,p), why?
+function probMajorityCorrect(n,p) {
+  var k = Math.floor( n / 2 );
+  if (k < n/2) {
+    // then binomial.cdf(k) = prob of incorrect vote
+    return 1-(jStat.binomial.cdf)(k,n,p)
+  } else {
+    // then binomial.cdf(k-1) = prob of incorrect vote
+    //  plus 1/2*binomial.pdf(k) = 1/2 * prob of tie
+    return 1-( jStat.binomial.cdf(k-1,n,p)
+      + 1/2 * jStat.binomial.pdf(k, n, p) )
+  }
+}
+
+// Create graph data
+g1 = Array.from({ length: maxPopulation }, (_, i) => ({
+  n: i + 1,
+  value: probMajorityCorrect(i + 1, g1Competence) * 100
+}));
+
+// tline = Array.from({ length: maxPopulation }, (_, i) => ({
+//   n: i + 1,
+//   value : targetThreshold,
+// }))
+
+Plot.plot({
+  marks: [
+    Plot.line(g1, { x: "n", y: "value", stroke: "steelblue" })
+  ],
+  x: { label: "Number electors", domain: [1, maxPopulation], grid: true },
+  y: { label: "Prob correct majority", domain: [0,100], ticks: 20,
+    grid: true
+   }
+});
+
+```
+
+
+<!--
+## Theorem
+
+Let $n$ the number of electors, $p$ the individual elector
+competence: how likely an individual elector is likely to vote
+correctly. It is assumed that each all electors are exactly as
+competent as each other. It is also assumed that the votes are
+independent: how likely one elector is to pick the correct vote
+isn't affected by how other electors vote.
+
+-->
+
+

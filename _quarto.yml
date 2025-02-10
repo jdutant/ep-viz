@@ -1,0 +1,24 @@
+project:
+  type: website
+
+bibliography: topics/references.bib
+
+website:
+  title: "Epistemology Vizualized"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - text: Topics
+        menu:
+          - text: Condorcet Jury Theorem
+            href: topics/condorcet.qmd
+
+format:
+  html:
+    theme: journal
+    css: media/styles.css
+    toc: true
+
+
+
